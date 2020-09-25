@@ -1,0 +1,28 @@
+{
+    "database_uri": "mongodb://127.0.0.1/arkflame_web",
+    "session": {
+        "secret": "set here a secret passphrase :D",
+        "resave": true,
+        "saveUninitialized": true,
+        "cookie": {
+            "domain": "arkflame.com",
+            "maxAge": 604800
+        }
+    },
+    "content_length_validator": {
+        "max": 10000,
+        "status": 401,
+        "message": "Too big payload receive. You has been flagged by our DDoS protection"
+    },
+    "cors": {
+        "credentials": true,
+        "origin": [
+            "https://arkflame.com"
+        ]
+    },
+    "ratelimit": {
+        "windowMs": 900000,
+        "max": 100,
+        "message": "Too many requests. You has been flagged by our DDoS protection"
+    }
+}
