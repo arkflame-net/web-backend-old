@@ -1,6 +1,6 @@
 const express = require("express");
 const Router = express.Router();
-const payment = require("../controllers/payment.controller");
+const paypalController = require("../controllers/paypal.controller");
 
 Router.get("/json", (req, res) => {
     res.json({
@@ -17,7 +17,7 @@ Router.get("/html", (req, res) => {
 // por una buena razon
 Router.post("/buy", async (req, res) => {
     // esto era la url que sera redireccionado el usuario
-    let callback = await payment.buy().catch(() => { return "/error" });
+    let callback = await paypalController.buy().catch(() => { return "/error" });
 
     // y aqui lo redireccionamos
     res.json({

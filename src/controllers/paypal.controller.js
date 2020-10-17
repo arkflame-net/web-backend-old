@@ -6,28 +6,29 @@ paypal.configure({
     'client_secret': process.env.PAYPAL_CLIENT_SECRET,
 });
 
+/* Generate the product to process */
 function createSale() {
     return {
-        "intent": "sale",
-        "payer": {
-            "payment_method": "paypal"
+        intent: "sale",
+        payer: {
+            payment_method: "paypal"
         },
-        "redirect_urls": {
-            "return_url": "http://localhost:3000/success",
-            "cancel_url": "http://localhost:3000/error"
+        redirect_urls: {
+            return_url: "http://localhost:3000/success",
+            cancel_url: "http://localhost:3000/error"
         },
-        "transactions": [{
-            "amount": {
-                "total": 39.00,
-                "currency": "USD"
+        transactions: [{
+            amount: {
+                total: 39.00,
+                currency: "USD"
             },
 
-            "description": "You are buying... x3 Daedrico"
+            description: "You are buying... x3 Daedrico"
         }]
     }
 }
 
-// funcion de utilidad todo listo handleado por lado del servidor, ahora el "cliente"va las rutas
+/* Generate the payment to process */
 function createPayment(payment) {
     return new Promise((resolve, reject) => {
         paypal.payment.create(payment, (err, payout) => {
@@ -41,13 +42,12 @@ function createPayment(payment) {
     });
 }
 
-// Accion de comprar
+/* Generate product and payment then redirect */
 exports.buy = () => {
-    // esto nomas para q sea full async
     return new Promise(async (resolve, reject) => {
         let sale = createSale();
-
         let payment = await createPayment(sale).catch((e) => { return null });
+
         if (payment == null) {
             return reject();
         }
