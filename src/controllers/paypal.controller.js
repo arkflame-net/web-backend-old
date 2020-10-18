@@ -43,7 +43,8 @@ function createPayment(payment) {
 }
 
 /* Generate product and payment then redirect */
-exports.buy = () => {
+/* TODO: Get all products from basket and make a payment from that */
+exports.checkout = () => {
     return new Promise(async (resolve, reject) => {
         let sale = createSale();
         let payment = await createPayment(sale).catch((e) => { return null });

@@ -4,37 +4,33 @@ const paypalController = require("../controllers/paypal.controller");
 
 Router.get("/json", (req, res) => {
     res.json({
-        "text": "onii chan uwu",
+        "text": "Test JSON",
     })
 });
 
 Router.get("/html", (req, res) => {
-    res.write("<h1>onii chan uwu</h1>");
+    res.write("<h1>Test HTML</h1>");
     res.end();
 });
 
-// pero probare la api sin la app de react
-// por una buena razon
-Router.post("/buy", async (req, res) => {
-    // esto era la url que sera redireccionado el usuario
-    let callback = await paypalController.buy().catch(() => { return "/error" });
+/* TODO: Switch between Paypal and MercadoPago controller */
+Router.post("/checkout", async (req, res) => {
+    let callback = await paypalController.checkout().catch(() => { return "/error" });
 
-    // y aqui lo redireccionamos
     res.json({
-        redirect: callback
-    })
+        redirect: callback,
+    });
 
-    // para probar q to funcione
-    console.log("Redireccionando al usuario a " + callback);
+    console.log("Redirecting to " + callback);
 });
 
 Router.get("/success", async (req, res) => {
-    console.log("SUCCESS!!!");
+    res.write("<h1>Success</h1>");
     res.end();
 });
 
 Router.get("/error", async (req, res) => {
-    console.log("ERROR!!!");
+    res.write("<h1>Error</h1>");
     res.end();
 });
 

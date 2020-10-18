@@ -1,10 +1,12 @@
 import { model, Schema } from 'mongoose';
 
-model("Customer", new Schema({
-    name: {
+model("Payment", new Schema({
+    id: {
         type: String,
         unique: true,
         required: true,
     },
-    products: Set,
+    external_id: String,
+    method: String,
+    amount: Number,
 }));
