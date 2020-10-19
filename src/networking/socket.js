@@ -5,8 +5,6 @@ class Socket {
         this.server = net.createServer();
         this.connections = new Set();
         this.events = new Map();
-        this.port = 6000;
-        this.address = "127.0.0.1";
 
         this.setup();
     }
@@ -47,11 +45,11 @@ class Socket {
         });
     }
 
-    listen(callback) {
-        this.server.listen(this.port, this.address);
+    listen(callback, port, address) {
+        this.server.listen(port, address);
 
         if (callback != null) {
-            callback(this.port, this.address);
+            callback(port, address);
         }
     }
 
