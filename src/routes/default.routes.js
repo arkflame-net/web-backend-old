@@ -23,7 +23,7 @@ Router.post("/checkout", async (req, res) => {
 });
 
 /* TODO: Return available products */
-Router.post("/products", async (req, res) => {
+Router.get("/products", async (req, res) => {
     res.json({
         "categories": [
             {
