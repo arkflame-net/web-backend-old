@@ -22,8 +22,8 @@ app.use(cors({
 app.use(require("./routes/default.routes"));
 
 // HTTP Listener
-app.listen(4000, () => {
-    console.log("[HTTP] Server listening on port 4000");
+app.listen(6546, () => {
+    console.log("[HTTP] Server listening on port 6546");
 });
 
 // TCP Listener
