@@ -1,4 +1,5 @@
 const express = require("express");
+const mercadopago = require("mercadopago/lib/mercadopago");
 const Router = express.Router();
 const mercadoPagoController = require("../controllers/mercadopago.controller");
 const paypalController = require("../controllers/paypal.controller");
@@ -16,9 +17,18 @@ Router.get("/html", (req, res) => {
 
 /* TODO: Switch between Paypal and MercadoPago controller */
 Router.post("/checkout", async (req, res) => {
-    console.log(req.query);
+    let method = req.query.method;
+    let callback;
 
-    let callback = await paypalController.checkout().catch(() => { return "/error" });
+    console.log(method);
+
+    if (method == "mercadopago") {
+        callback = await mercadoPagoController.checkout().catch(() => { return "/error" });
+    } else if (method == "paypal") {
+        callback = await paypalController.checkout().catch(() => { return "/error" });
+    } else {
+        callback = "/error";
+    }
 
     res.json({
         redirect: callback,
