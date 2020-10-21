@@ -16,7 +16,7 @@ Router.get("/html", (req, res) => {
 });
 
 /* TODO: Switch between Paypal and MercadoPago controller */
-Router.post("/checkout", async (req, res) => {
+Router.get("/checkout", async (req, res) => {
     let method = req.query.method;
     let callback;
 
