@@ -15,9 +15,9 @@ Router.get("/html", (req, res) => {
 });
 
 /* TODO: Switch between Paypal and MercadoPago controller */
-Router.post("/checkout:method", async (req, res) => {
-    console.log(req.params);
-    
+Router.post("/checkout", async (req, res) => {
+    console.log(req.query);
+
     let callback = await paypalController.checkout().catch(() => { return "/error" });
 
     res.json({
