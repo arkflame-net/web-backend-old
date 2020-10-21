@@ -21,9 +21,9 @@ app.use(cors({
 // Routes
 app.use(require("./routes/default.routes"));
 
-// HTTP Listener
+// Express Listener
 app.listen(6546, () => {
-    console.log("[HTTP] Server listening on port 6546");
+    console.log("[Express] Server listening on port 6546");
 });
 
 // TCP Listener

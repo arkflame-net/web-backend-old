@@ -1,5 +1,6 @@
 const express = require("express");
 const Router = express.Router();
+const mercadoPagoController = require("../controllers/mercadopago.controller");
 const paypalController = require("../controllers/paypal.controller");
 
 Router.get("/json", (req, res) => {
@@ -24,6 +25,8 @@ Router.post("/checkout", async (req, res) => {
 
 /* TODO: Return available products */
 Router.get("/products", async (req, res) => {
+    console.log(req.params);
+
     res.json({
         "categories": [
             {
