@@ -9,4 +9,5 @@ model("Payment", new Schema({
     external_id: String,
     method: String,
     amount: Number,
+    products: Set,
 }));

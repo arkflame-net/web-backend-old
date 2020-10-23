@@ -1,8 +1,10 @@
 const express = require("express");
-const mercadopago = require("mercadopago/lib/mercadopago");
 const Router = express.Router();
 const mercadoPagoController = require("../controllers/mercadopago.controller");
 const paypalController = require("../controllers/paypal.controller");
+const productController = require("../controllers/product.controller");
+
+productController.addProducts();
 
 Router.get("/json", (req, res) => {
     res.json({
@@ -37,64 +39,7 @@ Router.get("/checkout", async (req, res) => {
 
 /* TODO: Return available products */
 Router.get("/products", async (req, res) => {
-    res.json({
-        "categories": [
-            {
-                "id": 1,
-                "name": "Rangos",
-                "items": [
-                    {
-                        "name": "HEROE",
-                        "price": 24.00,
-                        "image": "",
-                        "description": "Lorem ipsum dolor sit amet"
-                    },
-                    {
-                        "name": "TITAN",
-                        "price": 12.00,
-                        "image": "",
-                        "description": "Lorem ipsum dolor sit amet"
-                    },
-                    {
-                        "name": "MEGA",
-                        "price": 6.00,
-                        "image": "",
-                        "description": "Lorem ipsum dolor sit amet"
-                    },
-                    {
-                        "name": "ULTRA",
-                        "price": 3.00,
-                        "image": "",
-                        "description": "Lorem ipsum dolor sit amet"
-                    }
-                ]
-            },
-            {
-                "id": 2,
-                "name": "Apelaciones",
-                "items": [
-                    {
-                        "name": "Limpieza Total",
-                        "price": 10.00,
-                        "image": "",
-                        "description": "Lorem ipsum dolor sit amet"
-                    },
-                    {
-                        "name": "Unban",
-                        "price": 5.00,
-                        "image": "",
-                        "description": "Lorem ipsum dolor sit amet"
-                    },
-                    {
-                        "name": "Unmute",
-                        "price": 3.00,
-                        "image": "",
-                        "description": "Lorem ipsum dolor sit amet"
-                    }
-                ]
-            }
-        ]
-    });
+    res.json(productController.getProducts());
 });
 
 Router.get("/success", async (req, res) => {

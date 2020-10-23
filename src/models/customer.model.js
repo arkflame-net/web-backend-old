@@ -6,5 +6,5 @@ model("Customer", new Schema({
         unique: true,
         required: true,
     },
-    products: Set,
+    payments: Set,
 }));
